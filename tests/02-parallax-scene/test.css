@@ -1,0 +1,120 @@
+/* Test 02 — composed scene.
+   Four depth planes stacked back to front: backdrop, person, the 3D arm, and
+   out-of-focus foreground elements. Scroll pans the camera across the floor;
+   the cursor shifts the planes against each other.
+
+   The plates are flat colour stand-ins. Point IMAGES in test.js at real art
+   and each plate takes it as a background; once all of them are set, the
+   placeholder structure and the depth legend drop away. */
+
+.room-tour { --hero-scroll: 300svh; }
+
+.parallax { position: absolute; inset: 0; overflow: hidden; }
+
+.plate {
+  position: absolute;
+  /* Oversized so a plate can translate without exposing its edge. */
+  inset: -8% -12%;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.plate[data-layer=backdrop] { z-index: 1; }
+.plate[data-layer=person]   { z-index: 2; }
+.plate[data-layer=model]    { z-index: 3; }
+.plate[data-layer=foreground] { z-index: 4; }
+
+/* A flat stand-in plate can't show that it is moving, so the placeholders carry
+   enough structure — a stud grid, a floor line, edge bars — to read the
+   parallax. Real plates replace all of this. */
+.plate[data-layer=backdrop]:not([style*=background-image]) {
+  background-color: #2b3338;
+  background-image:
+    linear-gradient(0deg, #222a2e 0 30%, transparent 30%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 148px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 132px);
+}
+
+/* The machinist reads as a soft figure mid-floor, clear of the headline. */
+.plate[data-layer=person]:not([style*=background-image])::after {
+  content: '';
+  position: absolute; left: 42%; bottom: 14%;
+  width: 150px; height: 52%;
+  border-radius: 75px 75px 10px 10px;
+  background: linear-gradient(180deg, #3c4750, #1f262b);
+  box-shadow: 0 40px 90px -30px #000c;
+}
+
+/* Out-of-focus elements frame the shot rather than cover it. */
+.plate[data-layer=foreground]:not([style*=background-image]) {
+  background:
+    linear-gradient(0deg, #0e1315 0%, rgba(14, 19, 21, .82) 9%, transparent 26%),
+    linear-gradient(90deg, rgba(14, 19, 21, .8) 0%, rgba(14, 19, 21, .5) 7%, transparent 17%),
+    linear-gradient(270deg, rgba(14, 19, 21, .74) 0%, rgba(14, 19, 21, .45) 8%, transparent 20%);
+  filter: blur(2px);
+}
+/* A near upright at each edge — the clearest read on foreground travel. */
+.plate[data-layer=foreground]:not([style*=background-image])::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, transparent 13%, rgba(9, 13, 15, .92) 13% 17.5%, transparent 17.5%),
+    linear-gradient(90deg, transparent 84%, rgba(9, 13, 15, .86) 84% 89%, transparent 89%);
+  filter: blur(3px);
+}
+
+/* The slot the three.js arm mounts into. */
+.plate-model { display: grid; place-items: center; pointer-events: none; }
+.scene-3d {
+  position: relative;
+  width: min(46%, 620px);
+  aspect-ratio: 1.15;
+  margin-top: 4%;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 18px;
+  border: 1px dashed rgba(254, 252, 248, .3);
+  background:
+    radial-gradient(ellipse 60% 38% at 50% 88%, rgba(0, 0, 0, .45), transparent 70%),
+    linear-gradient(180deg, transparent 55%, rgba(48, 58, 64, .55) 55%);
+}
+.scene-3d canvas { width: 100%; height: 100%; display: block; }
+
+/* Marks the mount point for the arm. Remove once three.js renders there. */
+.plate-tag {
+  padding: 6px 9px; text-align: center; max-width: 260px;
+  font: .625rem/1.4 Supply, ui-monospace, monospace;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: rgba(254, 252, 248, .82); background: rgba(10, 15, 17, .72);
+  border: 1px solid rgba(254, 252, 248, .18);
+}
+
+/* Depth readout. Plates travel past the shell edges, so this sits outside them
+   rather than being carried off-screen. Front to back, top to bottom. */
+.layer-legend {
+  position: absolute; right: var(--gutter); top: calc(var(--header) + 74px);
+  z-index: 2; margin: 0; padding: 12px 14px; list-style: none;
+  display: flex; flex-direction: column; gap: 7px; min-width: 176px;
+  font: .625rem/1.3 Supply, ui-monospace, monospace;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: rgba(254, 252, 248, .78); background: rgba(10, 15, 17, .62);
+  border: 1px solid rgba(254, 252, 248, .16);
+}
+.layer-legend li { display: flex; justify-content: space-between; gap: 18px; }
+.layer-legend b { font-weight: 400; color: rgba(254, 252, 248, .95); }
+.parallax.is-clean ~ .layer-legend { display: none; }
+
+@media (max-width: 800px) {
+  .scene-3d { width: 70%; margin-top: 10%; }
+  .plate[data-layer=person]:not([style*=background-image])::after { width: 105px; left: 30%; }
+  .plate-tag { font-size: .5625rem; }
+  /* The legend would sit on the copy at this width. */
+  .layer-legend { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate { transform: none !important; }
+}
+body.motion-paused .plate { transform: none !important; }

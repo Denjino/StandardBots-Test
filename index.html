@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1E1E1E">
+  <meta name="description" content="Hero tests for Standard Bots — Room for More.">
+  <title>Hero tests — Standard Bots</title>
+  <link rel="icon" href="/assets/img/standard-bots-mark.png">
+  <link rel="stylesheet" href="/shared/base.css">
+  <style>
+    body { background: var(--graphite); color: var(--sand); }
+    .chooser { min-height: 100svh; padding: 48px var(--gutter) 60px; display: flex; flex-direction: column; }
+    .chooser-brand { width: 225px; }
+    .chooser-brand img { filter: invert(1); }
+    .chooser h1 {
+      font-size: clamp(56px, 8vw, 132px); line-height: .93; letter-spacing: -.055em;
+      margin: auto 0 40px; max-width: 12ch;
+    }
+    .chooser-lede { max-width: 440px; font-size: 1.125rem; line-height: 1.45; margin-bottom: 44px; }
+    .chooser-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;
+      border-top: 1px solid rgba(255, 255, 255, .28); padding-top: 34px;
+    }
+    .chooser-card {
+      display: flex; flex-direction: column; justify-content: space-between; gap: 46px;
+      min-height: 220px; padding: 26px 24px; border: 1px solid rgba(255, 255, 255, .32);
+      transition: background .2s, color .2s, transform .2s;
+    }
+    .chooser-card:hover { background: var(--sand); color: var(--graphite); transform: translateY(-3px); }
+    .chooser-card strong {
+      display: block; font-size: clamp(28px, 3vw, 44px); font-weight: 400;
+      line-height: 1.02; letter-spacing: -.035em; margin-bottom: 12px;
+    }
+    .chooser-card p { font-size: .9375rem; line-height: 1.45; opacity: .85; }
+    .chooser-card-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .chooser-card-top b { font-weight: 400; font-size: 1.5rem; }
+    .chooser-foot {
+      margin-top: 40px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+      font: .75rem Supply, ui-monospace, monospace; color: rgba(254, 252, 248, .6);
+    }
+    @media (max-width: 800px) {
+      .chooser-grid { grid-template-columns: 1fr; }
+      .chooser-card { min-height: 0; gap: 28px; }
+      .chooser h1 { margin-top: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="chooser">
+    <a class="chooser-brand" href="/" aria-label="Standard Bots home">
+      <img src="/assets/img/standard-bots-logo.png" width="947" height="105" alt="Standard Bots">
+    </a>
+    <h1>Room for more. Hero tests.</h1>
+    <p class="chooser-lede">
+      The same page, the same three viewpoints in the hero. What changes is how the
+      backdrop behind the copy is built.
+    </p>
+    <div class="chooser-grid">
+      <a class="chooser-card" href="/tests/01-video-scroll/">
+        <span class="chooser-card-top"><span class="eyebrow">Test 01</span><b>↗</b></span>
+        <span>
+          <strong>Scroll film</strong>
+          <p>A frame sequence stepped by scroll position. Scroll up and the frames run in reverse.</p>
+        </span>
+      </a>
+      <a class="chooser-card" href="/tests/02-parallax-scene/">
+        <span class="chooser-card-top"><span class="eyebrow">Test 02</span><b>↗</b></span>
+        <span>
+          <strong>Composed scene</strong>
+          <p>Layered plates with the robot arm between them, moving with the cursor.</p>
+        </span>
+      </a>
+    </div>
+    <div class="chooser-foot">
+      <span>Standard Bots — Room for More</span>
+      <span>Hero prototypes</span>
+    </div>
+  </main>
+</body>
+</html>

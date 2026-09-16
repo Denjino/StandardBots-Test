@@ -1,0 +1,250 @@
+/* The hero: one fixed room, a visitor-controlled camera.
+   Three viewpoints — The machine / Skilled work / More possibilities — mapped
+   onto a tall sticky section so scrolling drives the camera.
+
+   Two knobs the individual tests set:
+     --hero-scroll  how tall the scroll track is (test 01 lengthens this so the
+                    frame sequence has room to play out).
+     data-theme     "dark" or "light" on .room-tour. Dark borrows the nav,
+                    copy and selector treatment from 01-room-for-more. */
+
+.room-tour {
+  height: var(--hero-scroll, 240svh);
+  min-height: 0;
+  overflow: visible;
+  perspective: none;
+  isolation: auto;
+  color: var(--hero-ink);
+  background: var(--hero-bg);
+}
+
+/* Dark is the default: a flat dark backdrop reads like the shaded photography. */
+.room-tour, .room-tour[data-theme=dark] {
+  --hero-bg: #191d1f;
+  --hero-ink: var(--sand);
+  --hero-muted: rgba(254, 252, 248, .66);
+  --hero-rule: rgba(255, 255, 255, .28);
+  --hero-rule-strong: rgba(255, 255, 255, .55);
+  --hero-chip-bg: transparent;
+  --hero-chip-border: rgba(255, 255, 255, .5);
+  --hero-panel: rgba(16, 21, 23, .62);
+  --hero-accent: #7f92ff;
+}
+
+.room-tour[data-theme=light] {
+  --hero-bg: #dcdcd5;
+  --hero-ink: var(--graphite);
+  --hero-muted: #50544f;
+  --hero-rule: rgba(30, 30, 30, .19);
+  --hero-rule-strong: rgba(30, 30, 30, .45);
+  --hero-chip-bg: var(--sand);
+  --hero-chip-border: #929991;
+  --hero-panel: rgba(254, 252, 248, .84);
+  --hero-accent: var(--cobalt);
+}
+
+.tour-shell {
+  position: sticky; top: 0; height: 100svh; min-height: 650px;
+  overflow: hidden; isolation: isolate;
+}
+
+.tour-visual { position: absolute; inset: 0; z-index: -2; background: var(--hero-bg); }
+.tour-poster { height: 100%; width: 100%; object-fit: cover; object-position: 60% center; }
+
+/* A flat backdrop stands in until each test drops its own media behind the copy. */
+.tour-flat { position: absolute; inset: 0; background: var(--hero-bg); }
+
+.tour-wash { position: absolute; inset: 0; pointer-events: none; }
+/* The left column has to hold white copy over whatever the backdrop is doing,
+   so it stays weighted well past where the reference photography needed it. */
+.room-tour[data-theme=dark] .tour-wash {
+  background:
+    linear-gradient(90deg, rgba(12, 19, 23, .88) 0%, rgba(12, 19, 23, .72) 26%,
+      rgba(12, 19, 23, .34) 52%, rgba(12, 19, 23, .04) 76%),
+    linear-gradient(0deg, rgba(10, 15, 18, .8), transparent 46%, rgba(10, 15, 18, .22));
+}
+.room-tour[data-theme=light] .tour-wash {
+  background: linear-gradient(90deg,
+    rgba(254, 252, 248, .97) 0%, rgba(254, 252, 248, .84) 23%,
+    rgba(254, 252, 248, .12) 53%, transparent 72%);
+}
+
+.tour-topline {
+  position: absolute; top: calc(var(--header) + 27px); left: var(--gutter);
+  right: var(--gutter); display: flex; align-items: center; justify-content: space-between;
+}
+.tour-application { padding: 5px 0; text-align: left; }
+.tour-application:hover { color: var(--hero-accent); }
+.tour-about {
+  font: .6875rem Supply, ui-monospace, monospace; padding: 6px 0; color: var(--hero-muted);
+  display: flex; gap: 9px; align-items: center; min-height: 32px;
+}
+.tour-about:hover { color: var(--hero-accent); }
+
+.tour-intro {
+  position: absolute; left: var(--gutter); top: calc(var(--header) + 85px);
+  width: 44%; opacity: var(--intro-opacity, 1);
+  transform: translateY(calc(var(--intro-shift, 0) * -20px));
+}
+.room-tour h1 { font-size: clamp(88px, 10.2vw, 160px); line-height: .88; letter-spacing: -.065em; }
+.tour-intro > p {
+  max-width: 325px; line-height: 1.4; font-size: 1.125rem; margin-top: 28px; margin-bottom: 26px;
+}
+.room-tour .film-link { font-size: .9375rem; max-width: 340px; line-height: 1.35; }
+.room-tour .play-icon { border-color: var(--hero-chip-border); width: 44px; height: 44px; }
+.room-tour[data-theme=dark] .film-link:hover .play-icon { background: var(--sand); color: var(--graphite); }
+.room-tour[data-theme=light] .film-link:hover .play-icon { background: var(--graphite); color: #fff; }
+
+.tour-discovery {
+  position: absolute; left: var(--gutter); top: calc(var(--header) + 90px);
+  max-width: 380px; opacity: var(--discovery-opacity, 0); visibility: hidden;
+}
+.tour-discovery h2 {
+  font-size: clamp(46px, 4.5vw, 72px); line-height: .95; letter-spacing: -.055em; margin: 24px 0;
+}
+.tour-discovery > p:not(.eyebrow) {
+  font-size: 1.0625rem; line-height: 1.45; max-width: 280px; margin-bottom: 28px;
+}
+
+.tour-hotspot {
+  position: absolute; left: 78%; top: 44%; display: flex; align-items: center;
+  gap: 11px; text-align: left; padding: 0; font-size: .75rem; line-height: 1.3;
+  color: var(--hero-ink);
+}
+.hotspot-circle {
+  width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%;
+  border: 1px solid var(--hero-chip-border); background: var(--hero-panel);
+  box-shadow: 0 3px 18px #0000001a; font-size: 1.1rem;
+}
+.hotspot-label { background: var(--hero-panel); padding: 7px 9px; }
+.tour-hotspot:hover .hotspot-circle {
+  background: var(--cobalt); color: #fff; border-color: var(--cobalt);
+}
+
+.tour-wayfinding {
+  position: absolute; left: var(--gutter); right: var(--gutter);
+  bottom: calc(var(--index) + 30px); display: grid;
+  grid-template-columns: 1fr auto; align-items: end; gap: 23px 38px;
+}
+.tour-invitation {
+  grid-column: 1/-1; display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--hero-rule); padding-bottom: 17px;
+}
+.tour-invitation > button {
+  padding: 0; font-size: 1.0625rem; display: flex; gap: 32px; align-items: center; min-height: 34px;
+}
+.tour-invitation > button > span { color: var(--hero-accent); font-size: 1.45rem; }
+.tour-scroll-hint {
+  font: .6875rem Supply, ui-monospace, monospace; letter-spacing: .03em;
+  text-transform: uppercase; color: var(--hero-muted);
+}
+
+.tour-stops {
+  display: flex; align-items: center; gap: 28px; position: relative; width: max-content;
+}
+.tour-stops > button {
+  display: flex; align-items: center; gap: 10px; padding: 0; font-size: .8125rem;
+  color: var(--hero-muted); position: relative; z-index: 1; min-height: 44px;
+}
+.stop-number {
+  width: 27px; height: 27px; border: 1px solid var(--hero-chip-border); display: grid;
+  place-items: center; border-radius: 50%; font: .625rem Supply, ui-monospace, monospace;
+  background: var(--hero-chip-bg);
+}
+.tour-stops > button[aria-current] { color: var(--hero-ink); }
+.tour-stops > button[aria-current] .stop-number {
+  background: var(--cobalt); color: #fff; border-color: var(--cobalt);
+}
+.tour-stops > button:hover { color: var(--hero-accent); }
+.tour-progress {
+  position: absolute; height: 1px; background: var(--hero-rule); left: 0; right: 0;
+  bottom: -12px; overflow: hidden;
+}
+.tour-progress i { display: block; height: 100%; background: var(--cobalt); width: calc(var(--tour-progress, 0) * 100%); }
+
+.tour-continue {
+  font: .6875rem Supply, ui-monospace, monospace; display: flex; align-items: center;
+  gap: 22px; text-transform: uppercase;
+}
+.tour-continue span:last-child { font: 1.3rem Neue, sans-serif; }
+
+/* Reduced motion and no-JS both collapse the track to a single screen and let
+   the stop buttons switch viewpoints directly. */
+.room-static { height: 100svh; min-height: 650px; }
+.room-static .tour-shell { position: relative; }
+.room-static .tour-scroll-hint { font-size: 0; }
+.room-static .tour-scroll-hint:after {
+  content: 'Choose a viewpoint →'; font: .6875rem Supply, ui-monospace, monospace;
+}
+.room-static .tour-progress { display: none; }
+.room-tour:not(.room-enabled) { height: 100svh; min-height: 650px; }
+
+@media (min-width: 801px) and (max-height: 760px) {
+  .tour-shell { min-height: 600px; }
+  .tour-intro { top: calc(var(--header) + 66px); }
+  .room-tour h1 { font-size: clamp(88px, 9.2vw, 130px); }
+  .tour-intro > p { font-size: 1rem; margin-top: 20px; margin-bottom: 22px; max-width: 305px; }
+  .tour-discovery { top: calc(var(--header) + 75px); }
+  .tour-wayfinding { bottom: calc(var(--index) + 24px); gap: 17px; }
+  .tour-invitation { padding-bottom: 12px; }
+  .tour-topline { top: calc(var(--header) + 19px); }
+}
+
+@media (max-width: 800px) {
+  .tour-shell { min-height: 670px; }
+  .tour-topline { top: calc(var(--header) + 21px); }
+  .tour-topline > .eyebrow, .tour-about { font-size: .625rem; }
+  .tour-intro { top: calc(var(--header) + 64px); width: 80%; }
+  .room-tour h1 { font-size: clamp(83px, 17vw, 128px); }
+  .tour-intro > p { font-size: 1rem; line-height: 1.4; max-width: 255px; margin: 22px 0; }
+  .room-tour .film-link { font-size: .8125rem; max-width: 240px; gap: 12px; }
+  .room-tour .play-icon { width: 37px; height: 37px; }
+  .room-tour[data-theme=light] .tour-wash {
+    background: linear-gradient(180deg,
+      rgba(254, 252, 248, .97) 0%, rgba(254, 252, 248, .91) 31%, rgba(254, 252, 248, .8) 47%,
+      transparent 56%, transparent 71%, rgba(254, 252, 248, .97) 88%);
+  }
+  .room-tour[data-theme=dark] .tour-wash {
+    background: linear-gradient(180deg,
+      rgba(10, 15, 18, .88) 0%, rgba(10, 15, 18, .6) 30%, rgba(10, 15, 18, .2) 50%,
+      rgba(10, 15, 18, .55) 74%, rgba(10, 15, 18, .9) 90%);
+  }
+  .tour-wayfinding { bottom: calc(var(--index) + 22px); gap: 15px; }
+  .tour-invitation { padding-bottom: 12px; }
+  .tour-invitation > button { font-size: .875rem; gap: 15px; min-height: 38px; }
+  .tour-scroll-hint { font-size: .5625rem; max-width: 125px; text-align: right; line-height: 1.4; }
+  .tour-stops {
+    gap: 13px; grid-column: 1/-1; width: 100%; justify-content: space-between; align-items: stretch;
+  }
+  .tour-stops > button {
+    font-size: .6875rem; min-height: 48px; flex-direction: column;
+    align-items: flex-start; gap: 6px;
+  }
+  .tour-stops > button:last-of-type { align-items: flex-end; }
+  .stop-number { width: 23px; height: 23px; font-size: .5625rem; }
+  .tour-continue { display: none; }
+  .tour-hotspot { display: none; }
+  .tour-discovery { top: calc(var(--header) + 70px); max-width: 310px; }
+  .tour-discovery h2 { font-size: 42px; max-width: 310px; margin: 20px 0; }
+  .tour-discovery > p:not(.eyebrow) { font-size: .9375rem; max-width: 240px; margin-bottom: 20px; }
+  .tour-discovery .eyebrow { font-size: .6875rem; }
+  .room-static { min-height: 670px; }
+}
+
+@media (max-width: 380px) {
+  .tour-stops { gap: 11px; }
+  .tour-stops > button { gap: 5px; font-size: .625rem; }
+  .tour-intro { top: calc(var(--header) + 59px); }
+  .room-tour h1 { font-size: 84px; }
+  .tour-about { font-size: .5625rem; }
+  .tour-wayfinding { gap: 17px; }
+  .tour-invitation > button { font-size: .8125rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-tour { height: 100svh; min-height: 670px; }
+  .tour-shell { position: relative; }
+  .tour-scroll-hint { font-size: 0; }
+  .tour-scroll-hint:after { content: 'Choose a viewpoint →'; font: .625rem Supply, ui-monospace, monospace; }
+  .tour-progress { display: none; }
+}
