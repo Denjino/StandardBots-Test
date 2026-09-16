@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
-.vercel
+dist/
+.vercel/
+tests/02-parallax-scene/robot-scene.bundle.js

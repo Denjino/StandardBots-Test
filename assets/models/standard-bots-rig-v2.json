@@ -1,0 +1,143 @@
+{
+  "units": "meters",
+  "up_axis": "Y",
+  "local_joint_axis": [
+    0,
+    1,
+    0
+  ],
+  "limits_are_provisional": true,
+  "joints": [
+    {
+      "name": "J0",
+      "rest_quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "rest_position": [
+        0,
+        0.04500001668930054,
+        0
+      ],
+      "axis_local": [
+        0,
+        1,
+        0
+      ],
+      "min_angle_deg": -150,
+      "max_angle_deg": 150
+    },
+    {
+      "name": "J1",
+      "rest_quaternion_xyzw": [
+        0.70710688829422,
+        0,
+        0,
+        0.7071066498756409
+      ],
+      "rest_position": [
+        0,
+        0.12700003385543823,
+        -0.08999998867511749
+      ],
+      "axis_local": [
+        0,
+        1,
+        0
+      ],
+      "min_angle_deg": -75,
+      "max_angle_deg": 80
+    },
+    {
+      "name": "J2",
+      "rest_quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "rest_position": [
+        -0.18000027537345886,
+        0,
+        -0.6090000867843628
+      ],
+      "axis_local": [
+        0,
+        1,
+        0
+      ],
+      "min_angle_deg": -120,
+      "max_angle_deg": 120
+    },
+    {
+      "name": "J3",
+      "rest_quaternion_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "rest_position": [
+        0.5541313290596008,
+        0.08500002324581146,
+        0.10181339085102081
+      ],
+      "axis_local": [
+        0,
+        1,
+        0
+      ],
+      "min_angle_deg": -150,
+      "max_angle_deg": 150
+    },
+    {
+      "name": "J4",
+      "rest_quaternion_xyzw": [
+        -0.12946182489395142,
+        0.12946182489395142,
+        -0.6951543688774109,
+        0.6951544284820557
+      ],
+      "rest_position": [
+        0.15487103164196014,
+        -0.08999998867511749,
+        -0.05975772812962532
+      ],
+      "axis_local": [
+        0,
+        1,
+        0
+      ],
+      "min_angle_deg": -100,
+      "max_angle_deg": 100
+    },
+    {
+      "name": "J5",
+      "rest_quaternion_xyzw": [
+        0.7071068286895752,
+        0,
+        0,
+        0.7071068286895752
+      ],
+      "rest_position": [
+        0,
+        0,
+        0.149999737739563
+      ],
+      "axis_local": [
+        0,
+        1,
+        0
+      ],
+      "min_angle_deg": -170,
+      "max_angle_deg": 170
+    }
+  ],
+  "tcp": "TCP",
+  "gripper_fingers": [
+    "Gripper_finger_L",
+    "Gripper_finger_R"
+  ]
+}

@@ -7,7 +7,7 @@
   <meta name="description" content="Say yes to more. Put AI-native robots to good use, and make more with what you already have. Explore Standard Bots.">
   <title>Say yes to more. — Standard Bots — Test 02 Composed scene</title>
   <link rel="icon" href="/assets/img/standard-bots-mark.png">
-  <link rel="preload" href="/assets/img/path-machining.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="/assets/img/SB-test2-base.png" as="image" fetchpriority="high">
   <link rel="stylesheet" href="/shared/base.css">
   <link rel="stylesheet" href="/shared/hero.css">
   <link rel="stylesheet" href="./test.css">
@@ -55,14 +55,15 @@
         <div class="tour-visual" id="tour-visual" role="img"
              aria-label="A concept machine shop composed in layers: the room behind, a machinist mid-floor, the robot arm on its table, and out-of-focus equipment in front.">
           <div class="parallax" id="parallax">
+           <div class="scene-world">
             <div class="plate" data-layer="backdrop"></div>
             <div class="plate" data-layer="person"></div>
             <div class="plate plate-model" data-layer="model">
-              <div class="scene-3d" id="scene-3d">
-                <span class="plate-tag">Robot arm + table — three.js mounts here</span>
-              </div>
+              <div class="scene-3d" id="scene-3d" data-state="loading"></div>
             </div>
             <div class="plate" data-layer="foreground"></div>
+            <img class="scene-still" src="/assets/img/robot-hero-reference.png" alt="" aria-hidden="true" fetchpriority="high" width="2688" height="1520">
+           </div>
           </div>
           <ul class="layer-legend" id="layer-legend" aria-hidden="true">
             <li><span>Foreground</span><b data-depth="foreground">—</b></li>
@@ -275,7 +276,7 @@
     <p class="eyebrow">Test 02 / Composed scene</p>
     <h2 id="tour-about-heading">One floor.<br>A wider view.</h2>
     <p>The scene is built in layers — the room behind, a machinist mid-floor, the robot arm on its table, and out-of-focus equipment in front. Scrolling moves between viewpoints; the cursor shifts the layers against each other for depth.</p>
-    <p class="detail-note">The plates are flat colour placeholders and the arm is a marked-out slot. The three.js arm, rigged to its physical pivots, goes in next.</p>
+    <p class="detail-note">Move your cursor to guide the robot’s attention. Its joints follow a limited, smooth range of motion. Pause motion at the foot of the page for a still view.</p>
   </div>
 </dialog>
 
