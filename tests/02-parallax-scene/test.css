@@ -9,7 +9,13 @@
 .plate[data-layer=backdrop] { z-index: 1; background-image: url('/assets/img/SB-test2-base.png'); }
 .plate[data-layer=person] { z-index: 2; background-image: url('/assets/img/SB-test2-man.png'); }
 .plate[data-layer=model] { z-index: 3; }
-.plate[data-layer=foreground] { z-index: 4; background-image: url('/assets/img/SB-test2-foreground.png'); }
+.scene-foreground {
+  position: absolute; right: -2px; bottom: -2px; z-index: 6;
+  width: 120%; aspect-ratio: 2688 / 1520;
+  background: url('/assets/img/SB-test2-foreground.png') right bottom / 100% 100% no-repeat;
+  opacity: 0;
+}
+.parallax.is-live .scene-foreground { opacity: 1; }
 .scene-3d, .scene-3d canvas { width: 100%; height: 100%; display: block; }
 .scene-still { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; object-fit: fill; }
 .parallax.is-live .scene-still { visibility: hidden; }
@@ -19,6 +25,7 @@
     linear-gradient(0deg, #0a0f12bf, transparent 32%, #0a0f1226);
 }
 @media (max-width: 800px) {
+  .scene-foreground { width: 220%; }
   .room-tour[data-theme=dark] .tour-wash {
     background: linear-gradient(180deg, #0a0f12bf 0%, #0a0f1280 30%, #0a0f121a 54%, #0a0f12d9 90%);
   }

@@ -17,6 +17,7 @@ test('cursor targets improve tool distance within all six limits, without moving
     assert.ok(end.toArray().every(Number.isFinite));
     if (x || y) assert.ok(end.distanceTo(rig.target) < rig.origin.distanceTo(rig.target), `tracking ${x},${y}`);
     rig.angles.forEach((v,i) => assert.ok(v >= rig.limits[i][0] && v <= rig.limits[i][1]));
+    assert.ok(Math.abs(rig.angles[0] - x * .24) < 1e-9, 'horizontal input rotates the base');
     assert.deepEqual(cart.matrixWorld.elements, cartRest.elements);
     assert.deepEqual(pedestal.matrixWorld.elements, baseRest.elements);
     assert.ok(end.y > .98, 'tool clears the cart tray');

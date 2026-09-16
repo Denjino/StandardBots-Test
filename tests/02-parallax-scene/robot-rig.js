@@ -2,7 +2,7 @@ import { MathUtils, Quaternion, Vector3 } from 'three';
 
 // Conservative presentation limits, relative to the modeled rest pose.
 // These are intentionally narrower than the provisional mechanical limits.
-const RANGE = [.20, .14, .20, .24, .15, .10];
+const RANGE = [.28, .19, .25, .30, .20, .13];
 const AXIS = new Vector3(0, 1, 0);
 export function createRobotRig(root) {
   const joints = Array.from({ length: 6 }, (_, i) => root.getObjectByName(`J${i}`));
@@ -30,9 +30,13 @@ export function createRobotRig(root) {
     y = Number.isFinite(y) ? MathUtils.clamp(y, -1, 1) : 0;
     // Solve from rest on each eased input: deterministic, no accumulating drift.
     reset();
-    target.copy(origin).add(new Vector3(x * .19, -y * .115, x * .035));
+    // Explicit pedestal-axis yaw gives left/right input a horizontal sweep.
+    pose(0, x * .24);
+    joints[0].getWorldPosition(p);
+    target.copy(origin).sub(p).applyAxisAngle(AXIS, angles[0]).add(p)
+      .add(new Vector3(x * .245, -y * .145, x * .045));
     for (let pass = 0; pass < 9; pass++) {
-      for (let i = 4; i >= 0; i--) {
+      for (let i = 4; i >= 1; i--) {
         joints[i].getWorldPosition(p);
         axis.copy(AXIS).applyQuaternion(joints[i].getWorldQuaternion(q));
         a.copy(tcp.getWorldPosition(end)).sub(p).addScaledVector(axis, -end.clone().sub(p).dot(axis));
