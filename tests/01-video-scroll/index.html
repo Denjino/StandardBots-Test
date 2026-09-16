@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1E1E1E">
+  <meta name="description" content="Say yes to more. Put AI-native robots to good use, and make more with what you already have. Explore Standard Bots.">
+  <title>Say yes to more. — Standard Bots — Test 01 Scroll film</title>
+  <link rel="icon" href="/assets/img/standard-bots-mark.png">
+  <link rel="preload" href="/assets/img/path-machining.jpg" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="/shared/base.css">
+  <link rel="stylesheet" href="/shared/hero.css">
+  <link rel="stylesheet" href="./test.css">
+  <script type="module" src="./test.js"></script>
+  <script type="module" src="/shared/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#machine-tending">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <a class="brand" href="#machine-tending" aria-label="Standard Bots home">
+    <img src="/assets/img/standard-bots-logo.png" width="947" height="105" alt="Standard Bots">
+  </a>
+  <nav class="primary-nav" aria-label="Main navigation">
+    <a href="#robots">Robots</a>
+    <a href="#standard-bots-ai">Standard Bots AI <span class="launch-tag">NEW</span></a>
+    <a href="#mission">Our mission</a>
+  </nav>
+  <button class="button header-contact" data-contact>
+    <span class="contact-label">Talk to our team</span>
+    <span class="contact-short">Let’s talk</span>
+    <span class="contact-arrow" aria-hidden="true">↗</span>
+  </button>
+  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+  <a href="#machine-tending">Applications</a>
+  <a href="#standard-bots-ai">Standard Bots AI</a>
+  <a href="#robots">Our robots</a>
+  <a href="#mission">Our mission</a>
+  <button class="button button-blue" data-contact>Talk to our team ↗</button>
+</nav>
+
+<main>
+  <div class="chapters" id="applications">
+
+    <!-- Hero: three viewpoints driven by one tall scroll track. In this test
+         the backdrop is a frame sequence stepped by scroll position. -->
+    <section class="chapter hero room-tour" id="machine-tending" data-chapter="0" data-theme="dark"
+             aria-labelledby="heading-machine-tending">
+      <div class="tour-shell">
+        <div class="tour-visual" id="tour-visual" role="img"
+             aria-label="A concept machine shop: a Core robot beside a CNC machine, with a second workstation revealed as you explore.">
+          <div class="tour-flat" id="frame-flat"></div>
+          <canvas id="frame-canvas" hidden></canvas>
+          <div class="frame-readout" id="frame-readout" aria-hidden="true">
+            <span class="frame-readout-title">Frame sequence</span>
+            <span id="frame-readout-state">No frames loaded — flat backdrop</span>
+            <span id="frame-readout-count">00 / 00</span>
+          </div>
+          <div class="tour-wash" aria-hidden="true"></div>
+        </div>
+
+        <div class="tour-topline">
+          <button class="eyebrow tour-application" data-detail="machine-tending">
+            <span class="blue-square"></span> 01 / Machine tending ↗
+          </button>
+          <button class="tour-about" id="tour-about-button" aria-label="About this concept scene">
+            Concept scene <span>ⓘ</span>
+          </button>
+        </div>
+
+        <div class="tour-intro">
+          <h1 id="heading-machine-tending" tabindex="-1">Say yes<br>to more.</h1>
+          <p>Put AI-native robots to good use, and make more with what you already have.</p>
+          <button class="film-link" data-film="path">
+            <span class="play-icon" aria-hidden="true">▶</span>
+            <span>Watch our short film<br>with Path Machining</span>
+          </button>
+        </div>
+
+        <div class="tour-discovery" aria-live="polite" aria-atomic="true">
+          <p class="eyebrow" id="tour-discovery-kicker">More machine time</p>
+          <h2 id="tour-discovery-title">Put your machines<br>to more use.</h2>
+          <p id="tour-discovery-body">Make room for the work you want to take on.</p>
+          <button class="film-link" data-film="path">
+            <span class="play-icon" aria-hidden="true">▶</span>
+            <span>See the work at Path Machining</span>
+          </button>
+        </div>
+
+        <button class="tour-hotspot" id="tour-hotspot" data-view="1" aria-label="Explore the skilled workstation">
+          <span class="hotspot-circle">↗</span>
+          <span class="hotspot-label">There’s more<br>around the corner.</span>
+        </button>
+
+        <div class="tour-wayfinding">
+          <div class="tour-invitation">
+            <button id="explore-floor">Explore the floor <span>↗</span></button>
+            <span class="tour-scroll-hint">Scroll to look around ↓</span>
+          </div>
+          <nav class="tour-stops" aria-label="Explore the floor viewpoints">
+            <button data-view="0" aria-current="step"><span class="stop-number">01</span><span>The machine</span></button>
+            <button data-view="1"><span class="stop-number">02</span><span>Skilled work</span></button>
+            <button data-view="2"><span class="stop-number">03</span><span>More possibilities</span></button>
+            <div class="tour-progress" aria-hidden="true"><i></i></div>
+          </nav>
+          <a class="tour-continue" href="#welding"><span>Next: Welding</span><span>↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="welding" data-chapter="1" aria-labelledby="heading-welding">
+      <div class="scene" aria-hidden="true">
+        <img class="scene-image" src="/assets/img/welding.png" alt="" loading="lazy" width="1536" height="1024">
+        <div class="scene-shade"></div>
+        <div class="scene-aperture"></div>
+      </div>
+      <div class="chapter-content">
+        <p class="eyebrow chapter-kicker"><span>02 / 06</span> Welding</p>
+        <h2 id="heading-welding" tabindex="-1">Take on more<br>welding work.</h2>
+        <p class="chapter-body">Put your robot on the welds. Give your team room for the next job.</p>
+        <button class="film-link" data-film="nooyen">
+          <span class="play-icon" aria-hidden="true">▶</span>
+          <span>Watch our short film with Nooyen</span>
+        </button>
+      </div>
+      <div class="scene-caption concept-caption">Concept scene <span class="caption-divider">/</span> Welding</div>
+      <div class="chapter-details">
+        <div class="detail-top">
+          <span class="eyebrow">The work</span>
+          <button class="plain-link" data-detail="welding">Explore application <span>↗</span></button>
+        </div>
+        <h3>Put precision on repeat.</h3>
+        <p class="equipment-label">Process &amp; path</p>
+        <p class="equipment">Arc welding · Linear welds</p>
+      </div>
+      <a class="next-chapter" href="#inspection"><span>Next: Inspection</span><span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="chapter" id="inspection" data-chapter="2" aria-labelledby="heading-inspection">
+      <div class="scene" aria-hidden="true">
+        <img class="scene-image" src="/assets/img/eam-mosca.jpg" alt="" loading="lazy" width="2048" height="1152">
+        <div class="scene-shade"></div>
+        <div class="scene-aperture"></div>
+      </div>
+      <div class="chapter-content">
+        <p class="eyebrow chapter-kicker"><span>03 / 06</span> Inspection</p>
+        <h2 id="heading-inspection" tabindex="-1">Keep quality<br>moving.</h2>
+        <p class="chapter-body">Explore robotic inspection with EAM-Mosca.</p>
+        <button class="film-link" data-film="eam-mosca">
+          <span class="play-icon" aria-hidden="true">▶</span>
+          <span>Watch our short film with EAM-Mosca</span>
+        </button>
+      </div>
+      <div class="scene-caption concept-caption">Customer floor <span class="caption-divider">/</span> EAM-Mosca</div>
+      <div class="chapter-details">
+        <div class="detail-top">
+          <span class="eyebrow">The work</span>
+          <button class="plain-link" data-detail="inspection">Explore application <span>↗</span></button>
+        </div>
+        <h3>A closer look at your work.</h3>
+        <p class="equipment-label">Customer perspective</p>
+        <p class="equipment">EAM-Mosca</p>
+      </div>
+      <a class="next-chapter" href="#prototypes"><span>Compare the tests</span><span aria-hidden="true">↓</span></a>
+    </section>
+
+  </div>
+
+  <nav class="application-index" id="application-index" aria-label="Choose your application">
+    <span class="index-label">Find your<br>room for more</span>
+    <div class="index-links">
+      <a href="#machine-tending" data-index="0" aria-current="location"><span>01</span>Machine tending</a>
+      <a href="#welding" data-index="1"><span>02</span>Welding</a>
+      <a href="#inspection" data-index="2"><span>03</span>Inspection</a>
+    </div>
+    <div class="mobile-index">
+      <label for="application-select">Explore applications</label>
+      <div class="select-wrap">
+        <select id="application-select">
+          <option value="machine-tending">01 — Machine tending</option>
+          <option value="welding">02 — Welding</option>
+          <option value="inspection">03 — Inspection</option>
+        </select>
+        <span aria-hidden="true">⌄</span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="proto-switch" id="prototypes" aria-labelledby="prototypes-heading">
+    <p class="eyebrow">Hero tests</p>
+    <h2 id="prototypes-heading">Two ways into<br>the same floor.</h2>
+    <p class="proto-switch-lede">Same page, same three viewpoints. The hero backdrop is what changes.</p>
+    <div class="proto-switch-grid">
+      <a class="proto-card" href="/tests/01-video-scroll/" aria-current="page">
+        <span class="proto-card-top"><span class="eyebrow">Test 01</span><b>↗</b></span>
+        <span>
+          <strong>Scroll film</strong>
+          <span class="proto-card-note">A frame sequence stepped by scroll position. Scrub up and the frames play in reverse.</span>
+        </span>
+      </a>
+      <a class="proto-card" href="/tests/02-parallax-scene/">
+        <span class="proto-card-top"><span class="eyebrow">Test 02</span><b>↗</b></span>
+        <span>
+          <strong>Composed scene</strong>
+          <span class="proto-card-note">Layered plates with the robot arm between them, tracking the mouse.</span>
+        </span>
+      </a>
+    </div>
+    <img class="cta-mark" src="/assets/img/standard-bots-mark.png" alt="" aria-hidden="true">
+  </section>
+</main>
+
+<footer class="footer">
+  <a href="#machine-tending" aria-label="Standard Bots home">
+    <img src="/assets/img/standard-bots-logo.png" alt="Standard Bots" width="947" height="105">
+  </a>
+  <p>Made for those who make America.</p>
+  <div>
+    <a href="#robots">Robots</a>
+    <a href="#standard-bots-ai">AI platform</a>
+    <a href="#mission">Our mission</a>
+    <button data-contact>Contact</button>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Standard Bots</span>
+    <span>Glen Cove, New York</span>
+    <button id="motion-toggle" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button>
+    <a href="https://standardbots.com/" target="_blank" rel="noopener">Visit standardbots.com ↗</a>
+  </div>
+</footer>
+
+<dialog id="film-dialog" class="film-dialog" aria-labelledby="film-title">
+  <div class="dialog-top">
+    <p class="eyebrow" id="film-eyebrow">Customer story</p>
+    <button class="close-button" data-close aria-label="Close customer story">×</button>
+  </div>
+  <div id="film-content"></div>
+</dialog>
+
+<dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title">
+  <button class="close-button" data-close aria-label="Close application details">×</button>
+  <div id="detail-content"></div>
+</dialog>
+
+<dialog id="contact-dialog" class="detail-dialog" aria-labelledby="contact-heading">
+  <button class="close-button" data-close aria-label="Close inquiry">×</button>
+  <div class="detail-body">
+    <p class="eyebrow">Let’s get to work</p>
+    <h2 id="contact-heading">What could you<br>say yes to?</h2>
+    <p>Tell us about your application. Start a conversation with the Standard Bots team.</p>
+    <p class="detail-note">The inquiry flow is not wired up in this test. It is a placeholder for the real contact form.</p>
+    <div class="detail-actions">
+      <a class="button button-blue" href="https://standardbots.com/" target="_blank" rel="noopener">Contact Standard Bots <span>↗</span></a>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="tour-about" class="detail-dialog" aria-labelledby="tour-about-heading">
+  <button class="close-button" data-close aria-label="Close scene information">×</button>
+  <div class="detail-body">
+    <p class="eyebrow">Test 01 / Scroll film</p>
+    <h2 id="tour-about-heading">One floor.<br>A wider view.</h2>
+    <p>Scroll or choose a viewpoint to move through the scene. The backdrop is a frame sequence stepped by scroll position rather than a playing video, so scrolling up runs it in reverse.</p>
+    <p class="detail-note">The sequence running here is a 48-frame placeholder panned across the Path Machining photograph, standing in for the real hero video. Drop the real frames into assets/frames/ and set the count in test.js.</p>
+  </div>
+</dialog>
+
+<div class="toast" role="status" aria-live="polite" id="toast"></div>
+</body>
+</html>

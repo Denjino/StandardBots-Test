@@ -1,0 +1,32 @@
+/* Test 01 — scroll film.
+   The hero backdrop is a frame sequence stepped by scroll position. The track
+   is longer than the base hero so the frames have room to play out; test.js
+   overrides this to suit the real frame count once one is supplied. */
+
+/* Baseline track, matching the reference hero. test.js raises this in
+   proportion to the frame count once a sequence is present. */
+.room-tour { --hero-scroll: 240svh; }
+
+#frame-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  /* The frames carry the scene; the flat plate sits behind them while they load. */
+  background: transparent;
+}
+
+/* Shown while there are no frames, or with ?debug=1, so the scroll mapping is
+   legible during review. Delete this block and the markup to ship. */
+.frame-readout {
+  position: absolute; right: var(--gutter); bottom: calc(var(--index) + 150px);
+  z-index: 2; display: none; flex-direction: column; gap: 5px;
+  padding: 13px 15px; max-width: 230px;
+  font: .6875rem/1.45 Supply, ui-monospace, monospace;
+  color: var(--hero-ink); background: var(--hero-panel);
+  border: 1px solid var(--hero-rule);
+}
+.frame-readout.is-visible { display: flex; }
+.frame-readout-title { text-transform: uppercase; letter-spacing: .06em; opacity: .6; }
+#frame-readout-count { font-size: 1.25rem; letter-spacing: -.01em; }
+
+@media (max-width: 800px) {
+  .frame-readout { bottom: calc(var(--index) + 210px); left: var(--gutter); right: auto; }
+}
