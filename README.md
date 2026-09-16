@@ -44,7 +44,7 @@ tests/01-video-scroll/          test.css, test.js, index.html
 tests/02-parallax-scene/        test.css, test.js, index.html
 assets/img/                     photography from the prototype
 assets/frames/                  frame sequence for test 01
-assets/fonts/                   drop the licensed fonts here
+assets/fonts/                   Neue + Supply woff2
 ```
 
 The two test pages each hold their own copy of the shared markup on purpose —
@@ -92,9 +92,6 @@ on `/assets`.
 
 - **The 3D arm.** Test 02 has the slot (`#scene-3d`) sitting at the right depth
   between the person and foreground plates, but nothing renders into it yet.
-- **Fonts.** Neue Montreal and Supply Sans are licensed and were not in the
-  prototype export. See `assets/fonts/README.md` — sizes and tracking are the
-  prototype's, so only the letterforms are wrong until they are dropped in.
 - **Sections below Inspection.** Finishing, Assembly, Palletizing, the
   possibilities grid, AI, mission, robots and support are all out of scope here.
 - **The contact form.** The nav button opens a placeholder dialog rather than
