@@ -54,7 +54,9 @@ export async function mountRobot(host, invalidate) {
     const mobile = innerWidth < 800;
     camera.aspect = width / height; camera.setFocalLength(55);
     const aim = new THREE.Vector3(mobile ? -.42 : .13, mobile ? 1.48 : 1.25, 0);
-    camera.position.copy(aim).add(mobile ? new THREE.Vector3(-1.815, 2.475, 9.57) : new THREE.Vector3(-1, 1.3, 5.3));
+    // Match both tray-edge slopes: a stronger side view and a lower eye height.
+    // The desktop eye is about 1.87 m high, rather than the previous 2.55 m.
+    camera.position.copy(aim).add(new THREE.Vector3(-2.39, .62, 4.86).multiplyScalar(mobile ? 1.8 : 1));
     camera.lookAt(aim); camera.updateProjectionMatrix();
     renderer.setSize(width, height, false); invalidate();
   }

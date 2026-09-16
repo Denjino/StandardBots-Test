@@ -2,6 +2,7 @@ import { createHeroTour } from '/shared/hero.js';
 const parallax = document.querySelector('#parallax');
 const world = document.querySelector('.scene-world');
 const host = document.querySelector('#scene-3d');
+const foreground = document.querySelector('.scene-foreground');
 const plates = [...world.querySelectorAll('.plate')];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const motionOff = () => reduced.matches || document.body.classList.contains('motion-paused');
@@ -19,6 +20,10 @@ function draw(now) {
     const pan = motionOff() ? 0 : -progress * 1.6 * d;
     plate.style.transform = `translate3d(${pan + x * .55 * d}%,${y * .24 * d}%,0)`;
   }
+  // Overscan exceeds these bounded offsets, so the corner stays covered.
+  const foregroundX = motionOff() ? 0 : x * 12 - progress * 8;
+  const foregroundY = motionOff() ? 0 : y * 7;
+  foreground.style.transform = `translate3d(${foregroundX}px,${foregroundY}px,0)`;
   robot?.render(x, y);
   if (Math.abs(tx - x) + Math.abs(ty - y) > .0005) invalidate();
 }

@@ -8,6 +8,9 @@ export function createRobotRig(root) {
   const joints = Array.from({ length: 6 }, (_, i) => root.getObjectByName(`J${i}`));
   const tcp = root.getObjectByName('TCP');
   if (!tcp || joints.some(j => !j)) throw new Error('Robot joint hierarchy is incomplete');
+  // Neutral photo pose: a little more shoulder lean, preserving forearm attitude.
+  joints[1].quaternion.multiply(new Quaternion().setFromAxisAngle(AXIS, .10));
+  joints[2].quaternion.multiply(new Quaternion().setFromAxisAngle(AXIS, -.10));
   const rest = joints.map(j => j.quaternion.clone());
   const angles = joints.map(() => 0);
   const limits = joints.map((j, i) => [
