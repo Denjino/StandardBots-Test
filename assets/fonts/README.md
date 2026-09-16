@@ -1,16 +1,17 @@
 # Fonts
 
-The prototype uses **Neue Montreal** (headings and body) and **Supply Sans**
-(the uppercase monospace eyebrows). Both are licensed and were not included in
-the prototype export, so they are not in this repo.
+Supplied and wired up:
 
-Drop these files in and they pick up automatically — `shared/base.css` already
-points at them:
+| File | Family | Weight |
+| --- | --- | --- |
+| `Neue-Regular.woff2` | `Neue` | 400 |
+| `Neue-Medium.woff2` | `Neue` | 500–800 |
+| `Supply-Regular.woff2` | `Supply` | 400 |
 
-    neue-montreal.woff2
-    neue-montreal-medium.woff2
-    supply-sans.woff2
+`Neue` carries the headings and body copy; `Supply` is the uppercase monospace
+used for eyebrows, captions and the wayfinding labels. The `@font-face` rules
+live at the top of `shared/base.css` — if these filenames ever change, that is
+the one place to update.
 
-Until then the pages fall back to Helvetica/Arial and the system monospace.
-Type sizes, tracking and line heights are taken from the prototype, so the
-layout is right but the letterforms are not.
+Fallbacks remain `Helvetica/Arial` and the system monospace, so a missing file
+degrades rather than breaking the layout.

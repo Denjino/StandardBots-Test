@@ -3,24 +3,23 @@
    sections these tests cover: header, hero, chapters, application index,
    dialogs, footer. */
 
-/* Neue Montreal and Supply Sans are licensed fonts and are not in the
-   prototype export. Drop the .woff2 files into assets/fonts/ and they pick up
-   automatically; until then the fallback stack below is used. */
+/* Neue Montreal (headings and body) and Supply Sans (the uppercase monospace
+   eyebrows), supplied as woff2 in assets/fonts/. */
 @font-face {
   font-family: Neue;
-  src: url('../assets/fonts/neue-montreal.woff2') format('woff2');
+  src: url('../assets/fonts/Neue-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: Neue;
-  src: url('../assets/fonts/neue-montreal-medium.woff2') format('woff2');
+  src: url('../assets/fonts/Neue-Medium.woff2') format('woff2');
   font-weight: 500 800;
   font-display: swap;
 }
 @font-face {
   font-family: Supply;
-  src: url('../assets/fonts/supply-sans.woff2') format('woff2');
+  src: url('../assets/fonts/Supply-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }

@@ -4,21 +4,23 @@
    that single frame is drawn. Scrolling up walks the index back down, so the
    sequence plays in reverse for free.
 
-   To load a real sequence, export the video to stills, drop them in
-   assets/frames/, and set COUNT (and FILE if the naming differs). Until then
-   the hero shows the flat backdrop so the scroll behaviour is still reviewable. */
+   Frames are preloaded up front; the first to arrive swaps out the flat plate
+   and the rest fill in behind it. To swap the sequence, replace the files in
+   assets/frames/ and update COUNT (and FILE if the naming differs). COUNT: 0
+   falls back to the flat backdrop. */
 
 import { createHeroTour } from '/shared/hero.js';
 
 const FRAMES = {
   // Number of stills in the sequence. 0 keeps the flat backdrop.
-  // Currently a 48-frame placeholder pan generated from path-machining.jpg —
-  // replace the files in assets/frames/ and update this number.
-  COUNT: 48,
+  // The shop-floor dolly, sampled at every 2nd source frame: the full 8s move,
+  // 97 stills. See assets/frames/README.md to regenerate at a different rate.
+  COUNT: 97,
   // Path for a given 1-based frame index.
-  FILE: i => `/assets/frames/hero-${String(i).padStart(4, '0')}.jpg`,
+  FILE: i => `/assets/frames/hero-${String(i).padStart(4, '0')}.webp`,
   // Roughly how much scroll each frame gets, in svh. Drives the track length.
-  SVH_PER_FRAME: 3.2,
+  // 97 x 3.7 puts the hero at ~360svh.
+  SVH_PER_FRAME: 3.7,
   // Track length floor/ceiling so a short or very long sequence stays usable.
   MIN_SVH: 240,
   MAX_SVH: 900,
@@ -34,7 +36,9 @@ const debug = new URLSearchParams(location.search).has('debug');
 
 const context = canvas.getContext('2d', { alpha: false });
 const images = [];
-let loaded = 0, ready = false, drawn = -1, canvasWidth = 0, canvasHeight = 0;
+let loaded = 0, ready = false, canvasWidth = 0, canvasHeight = 0;
+// wanted: the frame scroll is asking for. drawn: what is actually on the canvas.
+let wanted = 0, drawn = -1;
 
 const pad = n => String(n).padStart(2, '0');
 
@@ -65,20 +69,26 @@ function draw(image) {
   context.drawImage(image, (canvasWidth - width) / 2, (canvasHeight - height) / 2, width, height);
 }
 
+/* Paint the frame scroll is currently asking for. If it hasn't arrived yet the
+   last good frame stays up rather than flashing, and the load handler calls
+   back here the moment it lands. */
+function paint() {
+  if (wanted === drawn) return;
+  const image = images[wanted];
+  if (!image?.complete || !image.naturalWidth) return;
+  draw(image);
+  drawn = wanted;
+  setReadout(`${loaded} of ${FRAMES.COUNT} decoded`, `${pad(drawn + 1)} / ${pad(FRAMES.COUNT)}`);
+}
+
 function render(progress) {
   if (!ready) {
     setReadout('No frames loaded — flat backdrop', `${pad(0)} / ${pad(FRAMES.COUNT)}`);
     return;
   }
   resize();
-  const index = Math.round(progress * (FRAMES.COUNT - 1));
-  if (index !== drawn) {
-    const image = images[index];
-    if (image?.complete && image.naturalWidth) {
-      draw(image);
-      drawn = index;
-    }
-  }
+  wanted = Math.round(progress * (FRAMES.COUNT - 1));
+  paint();
   setReadout(`${loaded} of ${FRAMES.COUNT} decoded`, `${pad(drawn + 1)} / ${pad(FRAMES.COUNT)}`);
 }
 
@@ -86,7 +96,7 @@ function render(progress) {
    tour measures the hero, so its cached height is the final one. */
 if (FRAMES.COUNT) {
   const svh = Math.min(FRAMES.MAX_SVH, Math.max(FRAMES.MIN_SVH, FRAMES.COUNT * FRAMES.SVH_PER_FRAME));
-  tour.style.setProperty('--hero-scroll', `${svh}svh`);
+  tour.style.setProperty('--hero-scroll', `${Math.round(svh)}svh`);
 }
 
 const hero = createHeroTour({ onRender: render });
@@ -110,6 +120,9 @@ function loadFrames() {
         flat.hidden = true;
         resize();
         hero?.schedule();
+      } else if (i - 1 === wanted) {
+        // The frame scroll is sitting on just arrived — put it up now.
+        paint();
       }
       if (loaded === FRAMES.COUNT) readout?.classList.toggle('is-visible', debug);
     }, { once: true });
