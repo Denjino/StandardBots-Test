@@ -7,6 +7,11 @@
     "test": "node --test tests/02-parallax-scene/rig.test.js",
     "dev": "node scripts/serve.js"
   },
-  "dependencies": { "three": "0.180.0" },
-  "devDependencies": { "esbuild": "0.25.10" }
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10",
+    "sharp": "0.35.4"
+  }
 }

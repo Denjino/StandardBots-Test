@@ -33,10 +33,25 @@ export async function mountRobot(host, invalidate) {
   card(0xe3f6ff, 4, [5, .28], [2, 1.8, -3], [0, 0, 0]);
   card(0xe8eef2, 3.5, [6, 1.1], [0, .85, -3.5], [0, 0, 0]);
   card(0xb8a692, 1.2, [4, 5], [-5, 0, 1], [0, Math.PI / 2, 0]);
-  const environment = pmrem.fromScene(room, .015);
+  let environment = pmrem.fromScene(room, .015);
   scene.environment = environment.texture;
   scene.environmentIntensity = 1.15;
-  room.traverse(o => { o.geometry?.dispose(); o.material?.dispose(); }); pmrem.dispose();
+  room.traverse(o => { o.geometry?.dispose(); o.material?.dispose(); });
+  try {
+    // This supplied PNG is LDR and not a perfect spherical panorama. Its room
+    // colours/reflections still help; direct lights retain highlight/shadow range.
+    const image = await new THREE.TextureLoader().loadAsync('/assets/env/factory-reflections-v1.webp');
+    image.colorSpace = THREE.SRGBColorSpace;
+    const photographicEnvironment = pmrem.fromEquirectangular(image);
+    image.dispose(); environment.dispose(); environment = photographicEnvironment;
+    scene.environment = environment.texture;
+    scene.environmentIntensity = 1.65;
+    scene.environmentRotation.y = .65;
+    host.dataset.environment = 'factory-panorama';
+  } catch (error) {
+    host.dataset.environment = 'generated-fallback';
+    console.warn('Factory panorama unavailable; using reflection panels.', error);
+  } finally { pmrem.dispose(); }
   scene.add(new THREE.HemisphereLight(0xc4dbed, 0x756650, .65));
   const key = new THREE.DirectionalLight(0xffe5c5, 2.4);
   key.position.set(-3, 6, 4); key.castShadow = true;
